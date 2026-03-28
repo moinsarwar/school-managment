@@ -1,59 +1,215 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏫 School Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured **School Management System** built with **Laravel 12**, designed with **multi-role authentication** and a clean **Bootstrap** UI. The system supports four distinct user roles — Admin, Teacher, Student, and Office Staff — each with their own dashboards, permissions, and workflows.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 Multi-Role Authentication
+- **4 Separate Guards**: Admin, Teacher, Student, Office — each with independent login, session, and middleware
+- Custom authentication controllers and middleware per role
+- Protected dashboards with role-based access control
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👨‍💼 Admin Panel
+- **Classes Management** — Create, edit, delete school classes (Class 1–10)
+- **Sections Management** — Assign sections (A, B, etc.) to each class
+- **Subjects Management** — Add subjects per class (Math, English, Science, Urdu, Islamiat, CS)
+- **Teachers Management** — Full CRUD with class and subject assignment
+- **Students Management** — Full CRUD with class, section, roll number, and admission details
+- **Exams Management** — Create midterm and final exams per class
+- **Attendance Overview** — Read-only view of all attendance records
 
-## Learning Laravel
+### 👩‍🏫 Teacher Portal
+- **Mark Attendance** — Mark daily attendance (Present / Absent / Late) for assigned class students
+- **Enter Grades** — Submit student grades per exam and subject
+- **View Records** — Review previously submitted attendance and grades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 👨‍🎓 Student Portal
+- **Dashboard** — Personal overview with class and section info
+- **My Attendance** — View personal attendance history
+- **My Results** — View grades and exam results
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🏢 Office Portal
+- **Admissions Management** — Create, edit, and manage new student admissions
+- **Dashboard** — Overview of admission activities
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Tech Stack
 
-### Premium Partners
+| Layer         | Technology              |
+|---------------|-------------------------|
+| Framework     | Laravel 12              |
+| PHP           | 8.2+                    |
+| Frontend      | Blade Templates         |
+| CSS           | Bootstrap (CDN)         |
+| Database      | MySQL / SQLite          |
+| Auth          | Custom Multi-Guard      |
+| Package Mgr   | Composer + NPM          |
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 📁 Project Structure
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+school-managment/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/          # ClassController, SectionController, SubjectController, etc.
+│   │   │   ├── Teacher/        # AttendanceController, GradeController
+│   │   │   ├── Office/         # AdmissionController
+│   │   │   ├── AdminAuthController.php
+│   │   │   ├── TeacherAuthController.php
+│   │   │   ├── StudentAuthController.php
+│   │   │   └── OfficeAuthController.php
+│   │   └── Middleware/         # AdminMiddleware, TeacherMiddleware, etc.
+│   └── Models/                 # Admin, Teacher, Student, Office, SchoolClass, Section, Subject, Exam, Grade, Attendance
+├── database/
+│   ├── migrations/             # 15 migration files
+│   └── seeders/                # DatabaseSeeder with sample data
+├── resources/views/
+│   ├── admin/                  # Dashboard, Classes, Sections, Subjects, Teachers, Students, Exams, Attendance
+│   ├── teacher/                # Dashboard, Attendance, Grades
+│   ├── student/                # Dashboard, Attendance, Results
+│   ├── office/                 # Dashboard, Admissions
+│   └── layouts/                # admin, teacher, student, office, app layouts
+├── routes/web.php              # All role-based routes
+└── config/auth.php             # Multi-guard configuration
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📊 Database Schema
 
-## Security Vulnerabilities
+```
+┌──────────┐    ┌──────────┐    ┌──────────┐
+│  classes  │───▶│ sections │    │ subjects │
+│           │    │          │    │          │
+│  id, name │    │ class_id │    │ class_id │
+└─────┬─────┘    └──────────┘    └────┬─────┘
+      │                               │
+      ▼                               ▼
+┌──────────┐    ┌─────────────┐  ┌──────────┐
+│ students │───▶│ attendances │  │  grades  │
+│          │    │             │  │          │
+│ class_id │    │ student_id  │  │student_id│
+│section_id│    │ class_id    │  │subject_id│
+│roll_number│   │ date,status │  │ exam_id  │
+└──────────┘    │ marked_by   │  │  marks   │
+                └─────────────┘  └──────────┘
+┌──────────┐    ┌──────────┐
+│ teachers │    │  exams   │
+│          │    │          │
+│ class_id │    │ class_id │
+│subject_id│    │ name     │
+│qualific. │    │ date     │
+└──────────┘    └──────────┘
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🚀 Installation & Setup
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Prerequisites
+- PHP 8.2+
+- Composer
+- MySQL or SQLite
+- Node.js & NPM
+
+### Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/moinsarwar/school-managment.git
+cd school-managment
+
+# 2. Install PHP dependencies
+composer install
+
+# 3. Copy environment file and configure
+cp .env.example .env
+
+# 4. Generate application key
+php artisan key:generate
+
+# 5. Configure your database in .env
+#    DB_CONNECTION=mysql
+#    DB_DATABASE=school_management
+#    DB_USERNAME=root
+#    DB_PASSWORD=your_password
+
+# 6. Run migrations
+php artisan migrate
+
+# 7. Seed the database with sample data
+php artisan db:seed
+
+# 8. Install frontend dependencies
+npm install
+
+# 9. Start the development server
+php artisan serve
+```
+
+The application will be available at **http://localhost:8000**
+
+---
+
+## 🔑 Default Login Credentials
+
+| Role     | Email               | Password   | Login URL              |
+|----------|---------------------|------------|------------------------|
+| Admin    | admin@test.com      | password   | `/admin/login`         |
+| Teacher  | teacher1@test.com   | password   | `/teacher/login`       |
+| Student  | student1@test.com   | password   | `/student/login`       |
+| Office   | office@test.com     | password   | `/office/login`        |
+
+> **Note:** The seeder creates 10 teachers (`teacher1@test.com` to `teacher10@test.com`) and 50 students (`student1@test.com` to `student50@test.com`).
+
+---
+
+## 📋 Sample Seeded Data
+
+| Entity    | Count | Details                                |
+|-----------|-------|----------------------------------------|
+| Classes   | 10    | Class 1 through Class 10              |
+| Sections  | 20    | A and B per class                     |
+| Subjects  | 60    | 6 subjects per class                  |
+| Teachers  | 10    | 1 per class                           |
+| Students  | 50    | 5 per class (Section A)               |
+| Exams     | 20    | Midterm + Final per class             |
+
+---
+
+## 🛣️ Route Overview
+
+| Prefix       | Middleware   | Resources                                          |
+|--------------|--------------|-----------------------------------------------------|
+| `/admin`     | `admin`      | dashboard, classes, sections, subjects, teachers, students, exams, attendance |
+| `/teacher`   | `teacher`    | dashboard, attendance (mark), grades (enter)        |
+| `/student`   | `student`    | dashboard, attendance (view), results (view)        |
+| `/office`    | `office`     | dashboard, admissions (CRUD)                        |
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
+## 👤 Author
+
+**Moin Sarwar** — [@moinsarwar](https://github.com/moinsarwar)
