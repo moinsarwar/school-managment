@@ -28,6 +28,10 @@ return [
             'driver' => 'session',
             'provider' => 'offices',
         ],
+        'parent' => [
+            'driver' => 'session',
+            'provider' => 'parents',
+        ],
     ],
 
     'providers' => [
@@ -50,6 +54,10 @@ return [
         'offices' => [
             'driver' => 'eloquent',
             'model' => App\Models\Office::class,
+        ],
+        'parents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\ParentGuardian::class,
         ],
     ],
 

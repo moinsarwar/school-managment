@@ -23,6 +23,8 @@
                     href="{{ route('admin.dashboard') }}">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
+
+                <div class="nav-link text-secondary small fw-bold pt-3 pb-1 px-2 text-uppercase" style="font-size:.7rem;letter-spacing:.08em;">Academic</div>
                 <a class="nav-link text-white py-2 {{ request()->routeIs('admin.classes.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
                     href="{{ route('admin.classes.index') }}">
                     <i class="bi bi-building me-2"></i> Classes
@@ -35,13 +37,9 @@
                     href="{{ route('admin.subjects.index') }}">
                     <i class="bi bi-book me-2"></i> Subjects
                 </a>
-                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.teachers.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
-                    href="{{ route('admin.teachers.index') }}">
-                    <i class="bi bi-person-workspace me-2"></i> Teachers
-                </a>
-                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.students.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
-                    href="{{ route('admin.students.index') }}">
-                    <i class="bi bi-backpack me-2"></i> Students
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.timetables.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.timetables.index') }}">
+                    <i class="bi bi-calendar3-week me-2"></i> Timetable
                 </a>
                 <a class="nav-link text-white py-2 {{ request()->routeIs('admin.exams.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
                     href="{{ route('admin.exams.index') }}">
@@ -51,6 +49,53 @@
                     href="{{ route('admin.attendance.index') }}">
                     <i class="bi bi-clipboard-check me-2"></i> Attendance
                 </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.promotions.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.promotions.index') }}">
+                    <i class="bi bi-arrow-up-circle me-2"></i> Promotions
+                </a>
+
+                <div class="nav-link text-secondary small fw-bold pt-3 pb-1 px-2 text-uppercase" style="font-size:.7rem;letter-spacing:.08em;">People</div>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.teachers.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.teachers.index') }}">
+                    <i class="bi bi-person-workspace me-2"></i> Teachers
+                </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.students.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.students.index') }}">
+                    <i class="bi bi-backpack me-2"></i> Students
+                </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.users.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.users.index') }}">
+                    <i class="bi bi-people me-2"></i> User Management
+                </a>
+
+                <div class="nav-link text-secondary small fw-bold pt-3 pb-1 px-2 text-uppercase" style="font-size:.7rem;letter-spacing:.08em;">Finance</div>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.fee-structures.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.fee-structures.index') }}">
+                    <i class="bi bi-currency-dollar me-2"></i> Fee Structures
+                </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.fee-payments.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.fee-payments.index') }}">
+                    <i class="bi bi-cash-stack me-2"></i> Fee Payments
+                </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.fee-payments.defaulters') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.fee-payments.defaulters') }}">
+                    <i class="bi bi-exclamation-triangle me-2"></i> Fee Defaulters
+                </a>
+
+                <div class="nav-link text-secondary small fw-bold pt-3 pb-1 px-2 text-uppercase" style="font-size:.7rem;letter-spacing:.08em;">Administration</div>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.leaves.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.leaves.index') }}">
+                    <i class="bi bi-calendar-x me-2"></i> Leave Requests
+                </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.notices.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.notices.index') }}">
+                    <i class="bi bi-megaphone me-2"></i> Notice Board
+                </a>
+                <a class="nav-link text-white py-2 {{ request()->routeIs('admin.events.*') ? 'bg-danger bg-opacity-25 rounded' : '' }}"
+                    href="{{ route('admin.events.index') }}">
+                    <i class="bi bi-calendar-event me-2"></i> Events
+                </a>
+
                 <hr class="border-secondary">
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf

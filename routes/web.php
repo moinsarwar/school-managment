@@ -9,6 +9,8 @@ use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\OfficeAuthController;
 use App\Http\Controllers\OfficeDashboardController;
+use App\Http\Controllers\ParentAuthController;
+use App\Http\Controllers\ParentDashboardController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -16,8 +18,17 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\AttendanceController as AdminAttendanceController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\FeeStructureController;
+use App\Http\Controllers\Admin\FeePaymentController;
+use App\Http\Controllers\Admin\TimetableController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\LeaveController as AdminLeaveController;
+use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Teacher\AttendanceController as TeacherAttendanceController;
 use App\Http\Controllers\Teacher\GradeController;
+use App\Http\Controllers\Teacher\LeaveController as TeacherLeaveController;
 use App\Http\Controllers\Office\AdmissionController;
 
 /*
@@ -42,20 +53,48 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-        // Classes
+        // Classes / Sections / Subjects / Teachers / Students / Exams
         Route::resource('classes', ClassController::class)->names('admin.classes')->parameters(['classes' => 'class']);
-        // Sections
         Route::resource('sections', SectionController::class)->names('admin.sections');
-        // Subjects
         Route::resource('subjects', SubjectController::class)->names('admin.subjects');
-        // Teachers
         Route::resource('teachers', TeacherController::class)->names('admin.teachers');
-        // Students
         Route::resource('students', StudentController::class)->names('admin.students');
-        // Exams
         Route::resource('exams', ExamController::class)->names('admin.exams');
+
         // Attendance (read-only)
         Route::get('/attendance', [AdminAttendanceController::class, 'index'])->name('admin.attendance.index');
+
+        // User Management
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+        Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('/users/{role}/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::put('/users/{role}/{id}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::delete('/users/{role}/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+        // Fee Management
+        Route::resource('fee-structures', FeeStructureController::class)->names('admin.fee-structures');
+        Route::resource('fee-payments', FeePaymentController::class)->names('admin.fee-payments')->except(['edit', 'update', 'show']);
+        Route::get('/fee-defaulters', [FeePaymentController::class, 'defaulters'])->name('admin.fee-payments.defaulters');
+
+        // Timetable
+        Route::resource('timetables', TimetableController::class)->names('admin.timetables');
+
+        // Promotions
+        Route::get('/promotions', [PromotionController::class, 'index'])->name('admin.promotions.index');
+        Route::get('/promotions/create', [PromotionController::class, 'create'])->name('admin.promotions.create');
+        Route::post('/promotions', [PromotionController::class, 'store'])->name('admin.promotions.store');
+
+        // Leaves
+        Route::get('/leaves', [AdminLeaveController::class, 'index'])->name('admin.leaves.index');
+        Route::get('/leaves/{leave}', [AdminLeaveController::class, 'show'])->name('admin.leaves.show');
+        Route::put('/leaves/{leave}', [AdminLeaveController::class, 'update'])->name('admin.leaves.update');
+
+        // Notices
+        Route::resource('notices', NoticeController::class)->names('admin.notices');
+
+        // Events
+        Route::resource('events', EventController::class)->names('admin.events');
     });
 });
 
@@ -81,6 +120,11 @@ Route::prefix('teacher')->group(function () {
         Route::get('/grades', [GradeController::class, 'index'])->name('teacher.grades.index');
         Route::get('/grades/enter', [GradeController::class, 'create'])->name('teacher.grades.create');
         Route::post('/grades/enter', [GradeController::class, 'store'])->name('teacher.grades.store');
+
+        // Leave
+        Route::get('/leaves', [TeacherLeaveController::class, 'index'])->name('teacher.leaves.index');
+        Route::get('/leaves/apply', [TeacherLeaveController::class, 'create'])->name('teacher.leaves.create');
+        Route::post('/leaves', [TeacherLeaveController::class, 'store'])->name('teacher.leaves.store');
     });
 });
 
@@ -116,3 +160,22 @@ Route::prefix('office')->group(function () {
         Route::resource('admissions', AdmissionController::class)->names('office.admissions')->except('show', 'destroy');
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Parent Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('parent')->group(function () {
+    Route::get('/login', [ParentAuthController::class, 'showLoginForm'])->name('parent.login');
+    Route::post('/login', [ParentAuthController::class, 'login'])->name('parent.login.submit');
+    Route::post('/logout', [ParentAuthController::class, 'logout'])->name('parent.logout');
+
+    Route::middleware('parent')->group(function () {
+        Route::get('/dashboard', [ParentDashboardController::class, 'index'])->name('parent.dashboard');
+        Route::get('/child/{student}/attendance', [ParentDashboardController::class, 'childAttendance'])->name('parent.child.attendance');
+        Route::get('/child/{student}/results', [ParentDashboardController::class, 'childResults'])->name('parent.child.results');
+        Route::get('/child/{student}/fees', [ParentDashboardController::class, 'childFees'])->name('parent.child.fees');
+    });
+});
+

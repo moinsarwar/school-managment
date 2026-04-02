@@ -61,6 +61,18 @@
                             </div>
                         </a>
                     </div>
+
+                    <div class="col-sm-6">
+                        <a href="{{ route('parent.login') }}" class="text-decoration-none">
+                            <div class="card border-0 shadow-sm h-100 text-center p-4">
+                                <div class="card-body">
+                                    <i class="bi bi-people-fill display-4 text-secondary mb-3"></i>
+                                    <h5 class="card-title fw-bold">Parent</h5>
+                                    <p class="card-text text-muted small">Guardian / Parent Portal</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
