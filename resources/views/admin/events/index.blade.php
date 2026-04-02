@@ -7,7 +7,7 @@
 </div>
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark">
                 <tr><th>#</th><th>Title</th><th>Type</th><th>Date</th><th>Description</th><th>Actions</th></tr>
             </thead>
@@ -38,3 +38,4 @@
     </div>
 </div>
 @endsection
+

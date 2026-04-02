@@ -7,7 +7,7 @@
 </div>
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark"><tr><th>Exam</th><th>Subject</th><th>Marks</th><th>Grade</th></tr></thead>
             <tbody>
                 @forelse($grades as $g)
@@ -25,3 +25,4 @@
     </div>
 </div>
 @endsection
+

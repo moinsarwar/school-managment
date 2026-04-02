@@ -4,7 +4,7 @@
     <h4 class="fw-bold mb-4"><i class="bi bi-bar-chart me-2"></i>My Results</h4>
     <div class="card border-0 shadow-sm">
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover mb-0 dt-table">
                 <thead class="table-light">
                     <tr>
                         <th>Exam</th>

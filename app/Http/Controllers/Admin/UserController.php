@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Office;
+use App\Models\ParentGuardian;
 use App\Models\SchoolClass;
 use App\Models\Section;
 use App\Models\Subject;
@@ -21,8 +22,9 @@ class UserController extends Controller
         $teachers = Teacher::orderBy('name')->get();
         $students = Student::with(['schoolClass', 'section'])->orderBy('name')->get();
         $offices  = Office::orderBy('name')->get();
+        $parents  = ParentGuardian::orderBy('name')->get();
 
-        return view('admin.users.index', compact('admins', 'teachers', 'students', 'offices'));
+        return view('admin.users.index', compact('admins', 'teachers', 'students', 'offices', 'parents'));
     }
 
     public function create()
@@ -38,7 +40,7 @@ class UserController extends Controller
         $role = $request->input('role');
 
         $base = $request->validate([
-            'role'     => 'required|in:admin,teacher,student,office',
+            'role'     => 'required|in:admin,teacher,student,office,parent',
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255',
             'password' => 'required|string|min:6|confirmed',
@@ -61,6 +63,17 @@ class UserController extends Controller
                     return back()->withErrors(['email' => 'Email already taken.'])->withInput();
                 }
                 Office::create([
+                    'name'     => $request->name,
+                    'email'    => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                break;
+
+            case 'parent':
+                if (ParentGuardian::where('email', $request->email)->exists()) {
+                    return back()->withErrors(['email' => 'Email already taken.'])->withInput();
+                }
+                ParentGuardian::create([
                     'name'     => $request->name,
                     'email'    => $request->email,
                     'password' => Hash::make($request->password),
@@ -123,6 +136,7 @@ class UserController extends Controller
             'teacher' => Teacher::findOrFail($id),
             'student' => Student::findOrFail($id),
             'office'  => Office::findOrFail($id),
+            'parent'  => ParentGuardian::findOrFail($id),
             default   => abort(404),
         };
 
@@ -141,6 +155,7 @@ class UserController extends Controller
             'teacher' => Teacher::findOrFail($id),
             'student' => Student::findOrFail($id),
             'office'  => Office::findOrFail($id),
+            'parent'  => ParentGuardian::findOrFail($id),
             default   => abort(404),
         };
 
@@ -177,6 +192,7 @@ class UserController extends Controller
             'teacher' => Teacher::findOrFail($id),
             'student' => Student::findOrFail($id),
             'office'  => Office::findOrFail($id),
+            'parent'  => ParentGuardian::findOrFail($id),
             default   => abort(404),
         };
 

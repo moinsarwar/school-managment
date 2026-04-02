@@ -11,7 +11,7 @@
 @else
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark">
                 <tr><th>#</th><th>Student</th><th>Class</th><th>Fee Type</th><th>Amount Due</th><th>Amount Paid</th><th>Status</th></tr>
             </thead>
@@ -37,3 +37,4 @@
 </div>
 @endif
 @endsection
+

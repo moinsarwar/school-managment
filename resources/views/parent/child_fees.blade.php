@@ -7,7 +7,7 @@
 </div>
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark"><tr><th>Fee Type</th><th>Month</th><th>Amount Due</th><th>Amount Paid</th><th>Status</th></tr></thead>
             <tbody>
                 @forelse($payments as $p)
@@ -34,3 +34,4 @@
     @endif
 </div>
 @endsection
+

@@ -40,7 +40,7 @@
 
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark">
                 <tr><th>#</th><th>Student</th><th>Fee Type</th><th>Month/Year</th><th>Amount Paid</th><th>Status</th><th>Paid Date</th></tr>
             </thead>
@@ -71,3 +71,4 @@
     @endif
 </div>
 @endsection
+

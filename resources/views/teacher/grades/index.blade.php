@@ -8,7 +8,7 @@
     </div>
     <div class="card border-0 shadow-sm">
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover mb-0 dt-table">
                 <thead class="table-light">
                     <tr>
                         <th>Student</th>

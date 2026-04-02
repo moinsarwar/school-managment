@@ -12,6 +12,7 @@
     <li class="nav-item"><a class="nav-link {{ !request('tab') || request('tab')=='admin' ? 'active' : '' }}" href="?tab=admin">Admins ({{ $admins->count() }})</a></li>
     <li class="nav-item"><a class="nav-link {{ request('tab')=='teacher' ? 'active' : '' }}" href="?tab=teacher">Teachers ({{ $teachers->count() }})</a></li>
     <li class="nav-item"><a class="nav-link {{ request('tab')=='student' ? 'active' : '' }}" href="?tab=student">Students ({{ $students->count() }})</a></li>
+    <li class="nav-item"><a class="nav-link {{ request('tab')=='parent' ? 'active' : '' }}" href="?tab=parent">Parents ({{ $parents->count() }})</a></li>
     <li class="nav-item"><a class="nav-link {{ request('tab')=='office' ? 'active' : '' }}" href="?tab=office">Office Staff ({{ $offices->count() }})</a></li>
 </ul>
 
@@ -20,7 +21,7 @@
 @if($tab === 'admin')
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark"><tr><th>#</th><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
             <tbody>
                 @forelse($admins as $u)
@@ -46,7 +47,7 @@
 @elseif($tab === 'teacher')
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark"><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr></thead>
             <tbody>
                 @forelse($teachers as $u)
@@ -73,7 +74,7 @@
 @elseif($tab === 'student')
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark"><tr><th>#</th><th>Name</th><th>Email</th><th>Class</th><th>Roll No</th><th>Actions</th></tr></thead>
             <tbody>
                 @forelse($students as $u)
@@ -101,7 +102,7 @@
 @elseif($tab === 'office')
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark"><tr><th>#</th><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
             <tbody>
                 @forelse($offices as $u)
@@ -124,5 +125,32 @@
         </table>
     </div>
 </div>
+@elseif($tab === 'parent')
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0 dt-table">
+            <thead class="table-dark"><tr><th>#</th><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
+            <tbody>
+                @forelse($parents as $u)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $u->name }}</td>
+                    <td>{{ $u->email }}</td>
+                    <td>
+                        <a href="{{ route('admin.users.edit', ['parent', $u->id]) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a>
+                        <form method="POST" action="{{ route('admin.users.destroy', ['parent', $u->id]) }}" class="d-inline" onsubmit="return confirm('Delete?')">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr><td colspan="4" class="text-center text-muted">No parents found.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
 @endif
 @endsection
+

@@ -29,7 +29,7 @@
                             @error('subject_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                     </div>
-                    <table class="table table-hover mb-3">
+                    <table class="table table-hover mb-3 dt-table">
                         <thead class="table-light">
                             <tr>
                                 <th>Roll</th>

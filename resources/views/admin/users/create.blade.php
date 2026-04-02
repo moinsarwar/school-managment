@@ -26,6 +26,7 @@
                     <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>Admin</option>
                     <option value="teacher" {{ old('role')=='teacher' ? 'selected' : '' }}>Teacher</option>
                     <option value="student" {{ old('role')=='student' ? 'selected' : '' }}>Student</option>
+                    <option value="parent" {{ old('role')=='parent' ? 'selected' : '' }}>Parent</option>
                     <option value="office" {{ old('role')=='office' ? 'selected' : '' }}>Office Staff</option>
                 </select>
             </div>

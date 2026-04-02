@@ -11,7 +11,7 @@
                 <form method="POST" action="{{ route('teacher.attendance.store') }}">
                     @csrf
                     <input type="hidden" name="date" value="{{ $today }}">
-                    <table class="table table-hover mb-3">
+                    <table class="table table-hover mb-3 dt-table">
                         <thead class="table-light">
                             <tr>
                                 <th>Roll</th>

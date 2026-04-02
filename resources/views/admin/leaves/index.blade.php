@@ -33,7 +33,7 @@
 
 <div class="card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 dt-table">
             <thead class="table-dark">
                 <tr><th>#</th><th>Name</th><th>Type</th><th>From</th><th>To</th><th>Status</th><th>Actions</th></tr>
             </thead>
@@ -66,3 +66,4 @@
     @endif
 </div>
 @endsection
+
